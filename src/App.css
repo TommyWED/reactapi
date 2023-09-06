@@ -1,38 +1,92 @@
 .App {
   text-align: center;
+  height:100vh;
+  width:100%;
+  padding:0;
+  margin:0;
+  overflow-y: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.select{
+  display:flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.KOM{
+  border:5px solid black;
+  width:50%;
+  background-color: aqua;
+  height:60px;
+  font-size: 2.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.KMBContent{
+  background-color: white;
+  height:100%;
+  width:100%;
+}
+
+.KmbHead{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding-top:15px;
+}
+
+.KmbSearch{
+  display: flex;
+  align-items: center;
+  padding-right:60px;
+  font-size: 30px;
+}
+
+.KmbSearch input{
+  font-size:15px;
+  text-align: center;
+  /* padding-bottom:15px */
+  margin-top: 5px;
+}
+
+.KmbBtn{
+  padding-left:60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width:150px;
+
+}
+
+.KmbBtn button{
+  font-size: 20px;
+}
+
+.KmbList{
+  margin:10px;
+  background-color: aqua;
+  height:500px;
+  border-radius: 15px;
+  border:5px black solid;
+  overflow-y: scroll;
+}
+
+.stopList{
+  border-bottom: 1px solid black;
+  padding-bottom: 25px
+}
+
+
+/* small screen */
+
+@media screen and (max-width:800px){
+  .KmbSearch{
+    padding-right:15px;
   }
-  to {
-    transform: rotate(360deg);
+  .KmbBtn{
+    padding-left:15px;
+  }
+  .KmbList{
+    height:400px;
   }
 }
