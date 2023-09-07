@@ -24,6 +24,8 @@ export default function Kmb() {
     const [searchRoute, setSearchRoute] = useState("")
     const [stopInfo,setStopInfo] = useState([])
     const [TOF,setTOF] = useState(false)
+    const [stopName, setStopName] = useState([])
+    const stopobj = {}
     let count = 1
     useEffect(()=>{
         async function fetchStopData(){
@@ -35,13 +37,42 @@ export default function Kmb() {
                 console.log(error)
             }
         };
+        async function fetchStopName(){
+            try{
+                const response = await axios.get("https://data.etabus.gov.hk/v1/transport/kmb/stop")
+                setStopName(n => response.data)
+            } catch (error){
+                console.log(error)
+            }
+        }
         fetchStopData();
-        
+        fetchStopName();
+        // async function matchName(){
+        //     try{
+                
+        //     } catch (error){
+        //         console.log(error)
+        //     }
+        // }
+        // matchName()
     },[])
 
+    // useEffect(()=>{
+    //     for(let i=0;i<stopName.data.length;i++){
+    //         // stopobj[stopName.data[i].stop] = stopName.data[i].name_tc
+    //         console.log(stopName.data[i].stop)
+    //     }
+    // },[stopName])
+
+
     function handleSearch(){
-        console.log(stopInfo.data.filter((n)=> n.route == searchRoute).filter((n)=> n.bound === direction))
         
+        // console.log(stopInfo.data.filter((n)=> n.route == searchRoute).filter((n)=> n.bound === direction))
+        // console.log(stopName)
+        // console.log(stopName.data)
+        // console.log(stopobj)
+        // console.log(stopName.data[0].stop)
+        // console.log(stopName.data[0].name_tc)
     }
 
     function handleInputChange(e){
@@ -73,7 +104,7 @@ export default function Kmb() {
             <hr></hr>
             <hr></hr>
             <div className="KmbList">
-                {TOF === true && stopInfo.data.filter((n)=> n.route == searchRoute).filter((n)=> n.bound === direction).map((n)=> <p className="stopList">{count++} . {n.stop}</p>)}
+                {TOF === true && stopInfo.data.filter((n)=> n.route === searchRoute).filter((n)=> n.bound === direction).map((n)=> <p className="stopList">{count++} . {stopobj[n.stop]}</p>)}
             </div>
         </div>
     )   
