@@ -43,7 +43,7 @@ export default function Mtrtime( {line, station,lang}){
     
     return (
         <div>
-            <button type="button" onClick={handleCon}>console</button>
+            {/* <button type="button" onClick={handleCon}>console</button> */}
             {timeArr?.data[LS]?.UP && <h3>{direction[lang-1]} : {destobj[timeArr?.data[LS]?.UP[0].dest][lang-1]}</h3>}
             {(timeArr && TOFUP) && timeArr?.data[LS]?.UP?.map((n) =>  <p> {n.time} </p>)}
             {timeArr?.data[LS]?.DOWN && <h3>{direction[lang-1]} :{destobj[timeArr?.data[LS]?.DOWN[0].dest][lang-1]}</h3>}
