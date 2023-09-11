@@ -95,3 +95,21 @@
 
 
 /* -----------------MTR--------------------- */
+.MtrHead{
+  font-size: 2rem;
+  display:flex;
+  justify-content: space-evenly;
+}
+
+.MtrHead select{
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width:700px) {
+  .MtrHead{
+    font-size: 1.3rem;
+  }
+  .MtrHead select{
+    font-size: 1rem;
+  }  
+}

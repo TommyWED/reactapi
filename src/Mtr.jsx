@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Mtrtime from './Mtrtime';
 
 
@@ -14,12 +14,15 @@ export default function Mtr() {
     , "TWL":[['CEN', 'Central', '中環'], ['ADM', 'Admiralty', '金鐘'], ['TST', 'Tsim Sha Tsui', '尖沙咀'], ['JOR', 'Jordan', '佐敦'], ['YMT', 'Yau Ma Tei', '油麻地'], ['MOK', 'Mong Kok', '旺角'], ['PRE', 'Price Edward', '太子'], ['SSP', 'Sham Shui Po', '深水埗'], ['CSW', 'Cheung Sha Wan', '長沙灣'], ['LCK', 'Lai Chi Kok', '荔枝角'], ['MEF', 'Mei Foo', '美孚'], ['LAK', 'Lai King', '荔景'], ['KWF', 'Kwai Fong', '葵芳'], ['KWH', 'Kwai Hing', '葵興'], ['TWH', 'Tai Wo Hau', '大窩口'], ['TSW', 'Tsuen Wan', '荃灣']]
     , "ISL":[['KET', 'Kennedy Town', '堅尼地城'], ['HKU', 'HKU', '香港大學'], ['SYP', 'Sai Ying Pun', '西營盤'], ['SHW', 'Sheung Wan', '上環'], ['CEN', 'Central', '中環'], ['ADM', 'Admiralty', '金鐘'], ['WAC', 'Wan Chai', '灣仔'], ['CAB', 'Causeway Bay', '銅鑼灣'], ['TIH', 'Tin Hau', '天后'], ['FOH', 'Fortress Hill', '炮台山'], ['NOP', 'North Point', '北角'], ['QUB', 'Quarry Bay', '鰂魚涌'], ['TAK', 'Tai Koo', '太古'], ['SWH', 'Sai Wan Ho', '西灣河'], ['SKW', 'Shau Kei Wan', '筲箕灣'], ['HFC', 'Heng Fa Chuen', '杏花邨'], ['CHW', 'Chai Wan', '柴灣']]})
     const [line, setLine] = useState("AEL");
-    const AELLINE = {"name": "Airport Express", "sta":[["HOK","Hong Kong"], ["KOW","Kowloon"], "TSY", "AIR", "AWE"]}
+    // const AELLINE = {"name": "Airport Express", "sta":[["HOK","Hong Kong"], ["KOW","Kowloon"], "TSY", "AIR", "AWE"]}
     const [lang, setLang] = useState(1)
-    const [station, setStation] = useState("")
+    const [station, setStation] = useState("HOK")
+    const linearr = ["", 'Line', ' 線路']
+    const stationarr = ["", "Station", "站"]
     //one array , one object
     function handleLine(e){
         setLine(n=> e.target.value)
+        setStation(n=> lineStationObj[e.target.value][0][0])
     }
 
     function handleStat(e){
@@ -38,15 +41,20 @@ export default function Mtr() {
             <button type="button" onClick={handleChin}>中文</button>
             <button type="button" onClick={handleEng}>English</button>
             <div className="MtrHead">
-                Line:<select onChange={handleLine}>
-                {allLine.map((n)=> <option value={n[0]} key={n[0]}>{n[lang]}</option>)}
-                </select>
-                Station:<select onChange={handleStat}> 
+                <div>
+                    {linearr[lang]}:<select onChange={handleLine}>
+                    {allLine.map((n)=> <option value={n[0]} key={n[0]}>{n[lang]}</option>)}
+                    </select>
+                </div>
+                <div>
+                    {stationarr[lang]}:<select onChange={handleStat}> 
                     {lineStationObj[line].map((n)=> <option value={n[0]} key={n[0]}>{n[lang]}</option>)}
-                </select>
+                    </select>
+                </div>
+                
             </div>
             <hr></hr><hr></hr>
-            <Mtrtime line={line} station={station}/>
+            <Mtrtime line={line} station={station} lang={lang}/>
         </div>
     )   
 }
