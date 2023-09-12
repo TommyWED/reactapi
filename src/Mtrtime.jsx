@@ -67,7 +67,7 @@ export default function Mtrtime( {line, station,lang, lineStationObj}){
                 {timeArr?.data[LS]?.UP ? timeArr.data[LS].UP[0].plat : ''}
               </h2>
             )}
-            {(timeArr && TOFUP) && timeArr?.data[LS]?.UP?.map((n) =>  <p className="MtrEta"> {direction[lang-1]} : {destobj[timeArr?.data[LS]?.UP[0].dest][lang-1]} {n.time.substring(11,19)} </p>)}
+            {(timeArr && TOFUP) && timeArr?.data[LS]?.UP?.map((n) =>  <p className="MtrEta"> {direction[lang-1]} : {destobj[n.dest][lang-1]} {n.time.substring(11,19)} </p>)}
             {timeArr?.data[LS]?.DOWN && lang === 2 ? (
               <h2>
                 {timeArr.data[LS].DOWN[0].plat}
@@ -79,7 +79,7 @@ export default function Mtrtime( {line, station,lang, lineStationObj}){
                 {timeArr?.data[LS]?.DOWN ? timeArr.data[LS].DOWN[0].plat : ''}
               </h2>
             )}
-            {TOFD && timeArr?.data[LS]?.DOWN?.map((n) =>  <p className="MtrEta"> {direction[lang-1]} : <span>{destobj[timeArr?.data[LS]?.DOWN[0].dest][lang-1]}</span>  <span>{n.time.substring(11,19)}</span> </p>)}
+            {TOFD && timeArr?.data[LS]?.DOWN?.map((n) =>  <p className="MtrEta"> {direction[lang-1]} : <span>{destobj[n.dest][lang-1]}</span>  <span>{n.time.substring(11,19)}</span> </p>)}
         </div>
     )
 }
