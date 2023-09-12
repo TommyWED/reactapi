@@ -54,8 +54,8 @@ export default function Mtrtime( {line, station,lang, lineStationObj}){
     }
     
     return (
-        <div>
-            <button type="button" onClick={handleCon}>console</button>
+        <div className="KmbList">
+            {/* <button type="button" onClick={handleCon}>console</button> */}
             {timeArr?.data[LS]?.UP && lang === 2 ? (
               <h2>
                 {timeArr.data[LS].UP[0].plat}

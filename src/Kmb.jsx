@@ -105,7 +105,7 @@ export default function Kmb() {
                     <span>Route:</span><input type="text" value={searchRoute} onChange={handleInputChange}></input>
                 </div>
                 <div className="KmbBtn">
-                    <button type="button" onClick={handleSearch}>Search</button>
+                    {/* <button type="button" onClick={handleSearch}>Search</button> */}
                     <button type="button" onClick={handleReverse}>Reverse</button>
                 </div>
             </div>
