@@ -23,7 +23,7 @@ export default function Kmbtime( {stop, direction, searchRoute}){
 
     return (
         <div>
-            {(timeArr && timeArr.data) && timeArr.data.filter(n => (n.route === searchRoute) && (n.dir === direction)).map((n) => <p>{n.eta}</p>)}
+            {(timeArr && timeArr.data) && timeArr.data.filter(n => (n.route === searchRoute) && (n.dir === direction)).map((n) => <p>{n.eta.substring(11,19)}</p>)}
         </div>
     )
 }

@@ -61,6 +61,10 @@ export default function Kmb() {
         setStopobj(n=> tempobj)
     },[stopName])
 
+    // if(searchRoute){
+    //     setShowData(n=> stopInfo.data.filter((n)=> n.route === searchRoute).filter((n)=> n.bound === direction)[0].stop)
+    // } 
+
     // useEffect(()=>{
         
     //     try{
@@ -71,7 +75,7 @@ export default function Kmb() {
     //     }
     // },[showData])
     function handleSearch(){
-        console.log(stopobj)
+        console.log(stopInfo.data.filter((n)=> n.route === searchRoute).filter((n)=> n.bound === direction)[0].stop)
         
     }
 
@@ -110,7 +114,7 @@ export default function Kmb() {
             <div className="KmbList">
                 {TOF === true && stopInfo.data.filter((n)=> n.route === searchRoute)
                 .filter((n)=> n.bound === direction)
-                .map((n)=> <div className="stopList"><h3 data-stopid={n.stop} onClick={handleShow} >{count++} . {stopobj[n.stop]}</h3><br></br>
+                .map((n,index)=>  <div className="stopList"><h3 data-stopid={n.stop} onClick={handleShow} >{count++} . {stopobj[n.stop]}</h3><br></br>
                 {showData === n.stop &&<Kmbtime stop={n.stop} direction={direction} searchRoute={searchRoute}/>}</div>)}
             </div>
         </div>

@@ -2,17 +2,25 @@ import './App.css';
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 
-export default function Mtrtime( {line, station,lang}){
+export default function Mtrtime( {line, station,lang, lineStationObj}){
     
     const [timeArr, setTimeArr] = useState()
     const LS = `${line}-${station}`
-    const destobj =({"HOK":["Hong Kong", "香港"], "AWE": ["AsiaWorld Expo", '博覽會'],"TUC": ["Tung Chung", '東涌'],"WKS": ['Wu Kai Sha', '烏溪沙'] ,
-    'TUM': ['Tuen Mun', '屯門'], 'NOP':  ['North Point', '北角'], 'POA': ['Po Lam', '寶琳'], 'LHP': ['LOHAS Park', '康城'], 'ADM':['Admiralty', '金鐘'], 'LOW': [ 'Lo Wu', '羅湖'], 'LMC': ['Lok Ma Chau', '落馬洲'], 
-    'SOH': ['South Horizons', '海怡半島'], 'CEN': ['Central', '中環'], 'TSW': ['Tsuen Wan', '荃灣'], 'CHW': ['Chai Wan', '柴灣'], 'KET': ['Kennedy Town', '堅尼地城'],'SHS': ['Sheung Shui', '上水'],'HUH': ['Hung Hom', '紅磡']
-    ,'TAW': ['Tai Wai', '大圍'], 'TIK': [ 'Tiu Keng Leng', '調景嶺'] })
+    // const destobj =({"HOK":["Hong Kong", "香港"], "AWE": ["AsiaWorld Expo", '博覽會'],"TUC": ["Tung Chung", '東涌'],"WKS": ['Wu Kai Sha', '烏溪沙'] ,
+    // 'TUM': ['Tuen Mun', '屯門'], 'NOP':  ['North Point', '北角'], 'POA': ['Po Lam', '寶琳'], 'LHP': ['LOHAS Park', '康城'], 'ADM':['Admiralty', '金鐘'], 'LOW': [ 'Lo Wu', '羅湖'], 'LMC': ['Lok Ma Chau', '落馬洲'], 
+    // 'SOH': ['South Horizons', '海怡半島'], 'CEN': ['Central', '中環'], 'TSW': ['Tsuen Wan', '荃灣'], 'CHW': ['Chai Wan', '柴灣'], 'KET': ['Kennedy Town', '堅尼地城'],'SHS': ['Sheung Shui', '上水'],'HUH': ['Hung Hom', '紅磡']
+    // ,'TAW': ['Tai Wai', '大圍'], 'TIK': [ 'Tiu Keng Leng', '調景嶺'] })
     const [TOFUP, setTOFUP] = useState(false)
     const [TOFD, setTOFD] = useState(false)
+    const destobj = {}
     const direction = ["destination","目的地"]
+    const platform = ["Platform", "號月台"]
+    const linearr = ["AEL", "TCL", "TML", "TKL", "EAL", "SIL", "TWL", "ISL"]
+    for(let i=0; i<linearr.length;i++){
+        for(let j =0; j<lineStationObj[linearr[i]].length;j++){
+            destobj[lineStationObj[linearr[i]][j][0]] = [lineStationObj[linearr[i]][j][1] , lineStationObj[linearr[i]][j][2]]
+        }
+    }
     useEffect(()=>{
         async function fetchtime(){
             try{
@@ -34,21 +42,44 @@ export default function Mtrtime( {line, station,lang}){
             }
         }
         fetchtime()
+
     },[line,station])
 
 
     function handleCon(){
-        console.log(timeArr.data[`${line}-${station}`])
-        console.log(LS)
+        // console.log(timeArr.data[`${line}-${station}`])
+        // console.log(LS)
+        // console.log(destobj)\
+        console.log(timeArr?.data[LS])
     }
     
     return (
         <div>
-            {/* <button type="button" onClick={handleCon}>console</button> */}
-            {timeArr?.data[LS]?.UP && <h3>{direction[lang-1]} : {destobj[timeArr?.data[LS]?.UP[0].dest][lang-1]}</h3>}
-            {(timeArr && TOFUP) && timeArr?.data[LS]?.UP?.map((n) =>  <p> {n.time} </p>)}
-            {timeArr?.data[LS]?.DOWN && <h3>{direction[lang-1]} :{destobj[timeArr?.data[LS]?.DOWN[0].dest][lang-1]}</h3>}
-            {TOFD && timeArr?.data[LS]?.DOWN?.map((n) =>  <p> {n.time} </p>)}
+            <button type="button" onClick={handleCon}>console</button>
+            {timeArr?.data[LS]?.UP && lang === 2 ? (
+              <h2>
+                {timeArr.data[LS].UP[0].plat}
+                {platform[lang - 1]}
+              </h2>
+            ) : (
+              <h2>
+                {platform[lang - 1]}
+                {timeArr?.data[LS]?.UP ? timeArr.data[LS].UP[0].plat : ''}
+              </h2>
+            )}
+            {(timeArr && TOFUP) && timeArr?.data[LS]?.UP?.map((n) =>  <p className="MtrEta"> {direction[lang-1]} : {destobj[timeArr?.data[LS]?.UP[0].dest][lang-1]} {n.time.substring(11,19)} </p>)}
+            {timeArr?.data[LS]?.DOWN && lang === 2 ? (
+              <h2>
+                {timeArr.data[LS].DOWN[0].plat}
+                {platform[lang - 1]}
+              </h2>
+            ) : (
+              <h2>
+                {platform[lang - 1]}
+                {timeArr?.data[LS]?.DOWN ? timeArr.data[LS].DOWN[0].plat : ''}
+              </h2>
+            )}
+            {TOFD && timeArr?.data[LS]?.DOWN?.map((n) =>  <p className="MtrEta"> {direction[lang-1]} : <span>{destobj[timeArr?.data[LS]?.DOWN[0].dest][lang-1]}</span>  <span>{n.time.substring(11,19)}</span> </p>)}
         </div>
     )
 }

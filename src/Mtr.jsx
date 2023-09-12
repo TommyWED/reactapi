@@ -54,7 +54,7 @@ export default function Mtr() {
                 
             </div>
             <hr></hr><hr></hr>
-            <Mtrtime line={line} station={station} lang={lang}/>
+            <Mtrtime line={line} station={station} lang={lang} lineStationObj={lineStationObj}/>
         </div>
     )   
 }
