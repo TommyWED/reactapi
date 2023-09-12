@@ -1,3 +1,7 @@
+body{
+  background-color: black;
+}
+
 .App {
   text-align: center;
   height:100vh;
@@ -23,9 +27,13 @@
 }
 
 .KMBContent{
-  background-color: white;
+  background-color: black;
   height:100%;
   width:100%;
+}
+
+.KmbSearch span{
+  color:white
 }
 
 .KmbHead{
@@ -95,7 +103,23 @@
   font-size: larger;
 }
 
+.MtrBtn{
+  display:flex;
+  justify-content: center;
+}
 
+.MtrBtn button{
+  margin:10px;
+}
+
+.MtrHead{
+  color:white;
+}
+
+.MtrHead div{
+  padding-left: 10px;
+  padding-right: 10px;;
+}
 
 
 /* -----------------MTR--------------------- */

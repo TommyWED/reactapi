@@ -38,16 +38,18 @@ export default function Mtr() {
     }
     return(
         <div className="MTRContent">
-            <button type="button" onClick={handleChin}>中文</button>
-            <button type="button" onClick={handleEng}>English</button>
+            <div className="MtrBtn">
+                <button type="button" onClick={handleChin}>中文</button>
+                <button type="button" onClick={handleEng}>English</button>
+            </div>
             <div className="MtrHead">
                 <div>
-                    {linearr[lang]}:<select onChange={handleLine}>
+                    {linearr[lang]} : <select onChange={handleLine}>
                     {allLine.map((n)=> <option value={n[0]} key={n[0]}>{n[lang]}</option>)}
                     </select>
                 </div>
                 <div>
-                    {stationarr[lang]}:<select onChange={handleStat}> 
+                    {stationarr[lang]} : <select onChange={handleStat}> 
                     {lineStationObj[line].map((n)=> <option value={n[0]} key={n[0]}>{n[lang]}</option>)}
                     </select>
                 </div>
